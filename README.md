@@ -42,49 +42,20 @@ unsigned char RD(int x, int y, float t);
 
 我们的一些常规要求如下：
 
-- 每个函数的长度**不超过200个字符**（不包括函数的声明部分，只包含函数体）
+- 每个函数的长度**不超过200个字符**（不包括函数的声明部分，只包含函数体，不包括最外层的大括号）
 - 只能使用math.h标准库和我们提供的一些数学方法，不能使用额外的库文件
 - 不允许读取外部文件，只能使用程序**过程化地生成图片**
-- 你只能在这三个函数的函数体中编写代码，不能额外添加函数（但是你可以添加闭包函数）
+- 你只能在这三个函数的函数体中编写代码，不能额外添加函数（但是你可以在函数中编写闭包函数）
 
 其中对于各个不同的语言的额外要求如下
 
-### C & C++
-
-编写`render.h`。
-
-C语言使用C11标准；C++不允许使用STL，使用C++14标准。统一在`C_CPP/render.h`中编写。
-
-#### 编译和运行
-
-**Linux/MacOSX下**：我们假设你安装了make和**g++**并且其支持c++14标准，执行如下命令：
-
-```bash
-cd C_CPP
-make render
-```
-
-即可得到可执行的渲染文件`render`，使用`./render`执行，得到输出`result.gif`。
-
-**Windows下（我们更建议你使用MSYS2或者WSL环境来使用Linux完成）**：我们假设你安装了make和[clang++](https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/LLVM-14.0.6-win64.exe)并且其支持c++14标准，在`PowerShell`下执行如下命令：
-
-```bash
-cd C_CPP
-make render
-```
-
-即可得到可执行的渲染文件`render`，使用`.\render.exe`执行，得到输出`result.gif`。
-
-### JavaScript
-
-TODO
-
-### Rust
-
-TODO
+- [C/C++](./C_CPP/README.md)
+- [JavaScript](./JavaScript/README.md)
+- [Rust](./Rust/README.md)
 
 ### 提示 Hint
 
 对于参加比赛的选手，我们有如下的建议和提示：
 
 - 你可以在debug的时候任意改变渲染的图像数目和FPS来加速你的debug速度，但是记住请务必按照比赛要求提交渲染结果，否则记录无效
+- 你可以在编写的时候正常定义函数，提交的时候再进行**代码压缩**
