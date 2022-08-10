@@ -1,6 +1,6 @@
 # BYR-Mathematical-Art-Challenge
 
-北邮人数学艺术挑战赛，灵感参考[Tweetable Mathematical Art](http://codegolf.stackexchange.com/questions/35569/tweetable-mathematical-art)
+北邮人数学艺术挑战赛，灵感来自[Tweetable Mathematical Art](http://codegolf.stackexchange.com/questions/35569/tweetable-mathematical-art)
 
 ## 介绍 Description
 
@@ -22,9 +22,9 @@ unsigned char BL(int x, int y, float t) {v2 c=v2(-0.8,cos(t)*0.2);v2 z = v2(2.0*
 
 ## 规则 Rules
 
-首先，本次比赛使用MIT开源协议，所有提交者必须以某种形式（GitHub/Gitee）**开源**自己的代码（最简单的办法：Fork这个仓库，然后编写自己的代码）。提交时，需要提交自己的**仓库地址**和**渲染结果**。比赛**允许**查阅资料，但是**不允许**抄袭、滥用的行为。
+首先，本次比赛使用MIT开源协议，所有提交者必须以某种形式（GitHub/Gitee）**开源**自己的代码（最简单的办法：Fork这个仓库，然后编写自己的代码）。提交时，需要提交自己的**仓库地址**和**渲染结果**。比赛**允许**查阅资料，但是**不允许**抄袭、滥用的行为，相关行为一经举报查证，成绩将立即作废。
 
-本次比赛允许使用以下几种语言：
+本次比赛允许使用以下几种语言进行提交：
 
 - C/C++
 - JavaScript
@@ -38,11 +38,11 @@ unsigned char BL(int x, int y, float t) {v2 c=v2(-0.8,cos(t)*0.2);v2 z = v2(2.0*
 unsigned char RD(int x, int y, float t);
 ```
 
-前两个参数为像素的横坐标和纵坐标，第三个参数为时间，以秒为单位，我们会以24fps（一秒均匀截取24帧）为标准传入第三个参数；输出的是颜色分量的值。前两个参数为整数，范围{0,1, 2...,511}，第三个参数为浮点数，范围[0.0, 8.0]；输出为范围在[0, 255]的整数。
+前两个参数为像素的横坐标和纵坐标，第三个参数为时间，以秒为单位，我们会以24fps（一秒均匀截取24帧）为标准传入第三个参数；输出的是颜色分量的值。前两个参数为整数，范围{0,1, 2...,511}，第三个参数为浮点数，范围[0.0, 6.0]；输出为范围在[0, 255]的整数。
 
 我们的一些常规要求如下：
 
-- 每个函数的长度**不超过200个字符**（不包括函数的声明部分，只包含函数体，不包括最外层的大括号）
+- 如果没有特别说明，每个函数的长度**不超过200个字符**（不包括函数的声明部分，只包含函数体，不包括最外层的大括号）
 - 只能使用math.h标准库和我们提供的一些数学方法，不能使用额外的库文件
 - 不允许读取外部文件，只能使用程序**过程化地生成图片**
 - 你只能在这三个函数的函数体中编写代码，不能额外添加函数（但是你可以在函数中编写闭包函数）
@@ -52,6 +52,9 @@ unsigned char RD(int x, int y, float t);
 - [C/C++](./C_CPP/README.md)
 - [JavaScript](./JavaScript/README.md)
 - [Rust](./Rust/README.md)
+- [Python](./Python/README.md)
+- [Java](./Java/README.md)
+
 
 ### 提示 Hint
 
@@ -59,3 +62,12 @@ unsigned char RD(int x, int y, float t);
 
 - 你可以在debug的时候任意改变渲染的图像数目和FPS来加速你的debug速度，但是记住请务必按照比赛要求提交渲染结果，否则记录无效
 - 你可以在编写的时候正常定义函数，提交的时候再进行**代码压缩**
+
+### 一些有用的参考资料 Reference
+
+- 太极图形课：[程序动画：生成你的第一个二维动画](https://www.bilibili.com/video/BV14Q4y1q7C9)
+- [ShaderToys](https://www.shadertoy.com/)
+
+## 协议 LICENSE
+
+此{项目, 比赛}遵循MIT开源协议。
