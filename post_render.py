@@ -76,7 +76,6 @@ def convert_gif_to_mp4(ffmpeg_cmd: str, gif_path: str, mp4_path: str):
 
 
 ffmpeg_installed = check_ffmpeg()
-ffmpeg_installed = False
 if ffmpeg_installed:
     print('已检测到安装了ffmpeg，直接使用系统ffmpeg生成mp4')
 else:
