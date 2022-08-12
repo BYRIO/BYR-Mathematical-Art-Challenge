@@ -61,6 +61,7 @@ unsigned char RD(int x, int y, float t);
 
 - 太极图形课：[程序动画：生成你的第一个二维动画](https://www.bilibili.com/video/BV14Q4y1q7C9)
 - [ShaderToys](https://www.shadertoy.com/)
+- Inigo Quilez[Intro to Painting with Maths](https://www.youtube.com/watch?v=0ifChJ0nJfM&t=778s)
 
 ## 协议 LICENSE
 
