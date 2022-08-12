@@ -49,6 +49,12 @@ unsigned char RD(int x, int y, float t);
 - [Python](./Python/README.md)
 - [Java](./Java/README.md)
 
+由于生成的GIF图片帧数过高，而高帧数GIF在一些设备上是[不被支持](https://www.w3.org/Graphics/GIF/spec-gif89a.txt)的，因此我们提供了一个python脚本`post_render.py`来使用`ffmpeg`将gif格式的输出转换为mp4格式的文件：
+
+1. 运行你编写的代码，生成`result.gif`
+2. 安装python依赖`pip install -r requirements.txt`
+3. 依照说明修改脚本中的`language`变量
+4. 运行脚本（linux和macos用户需要自行安装ffmpeg，windows下会自动从服务器拉取可用的ffmpeg二进制预编译exe）`python post_render.py`
 
 ### 提示 Hint
 

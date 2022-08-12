@@ -118,5 +118,6 @@ Cargo.lock
 
 render
 render.exe
-result.gif
+result.*
 render.txt
+bin/
