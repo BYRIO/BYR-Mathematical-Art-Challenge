@@ -15,6 +15,7 @@ fn main() {
     let mut iframe = 0;
     let frame_total: u16 = render::TMAX as u16 * render::FPS;
     let mut data = vec![0; (render::DIM as usize * render::DIM as usize) * 4];
+    let delay = (render::FPS_INV * 100.0) as u16;
     while t.lt(&render::TMAX) && iframe < frame_total {
         iframe += 1;
         print!("\rRendering GIF frame {} of {}", iframe, frame_total);
@@ -30,7 +31,8 @@ fn main() {
                 data[base + 3] = 255 & 255;
             }
         }
-        let frame = Frame::from_rgba(render::DIM, render::DIM, &mut data);
+        let mut frame = Frame::from_rgba(render::DIM, render::DIM, &mut data);
+        frame.delay = delay;
         encoder.write_frame(&frame).unwrap();
         t += render::FPS_INV;
     }
