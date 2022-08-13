@@ -29,6 +29,7 @@ int main() {
     GifWriteFrame(&gWriter, framebuffer, DIM, DIM, delay);
     t += FPS_INV;
   }
+  printf("\n");
   GifEnd(&gWriter);
   return 0;
 }
