@@ -54,7 +54,7 @@ unsigned char RD(int x, int y, float t);
 1. 编写对应的语言代码
 2. 安装python依赖`pip install -r requirements.txt`
 3. 依照说明修改脚本中的`language`变量
-4. 运行脚本（linux和macos用户需要自行安装ffmpeg，windows下会自动从服务器拉取可用的ffmpeg二进制预编译exe）`python post_render.py`
+4. 运行脚本（linux和macos用户需要自行安装ffmpeg，windows下会自动从服务器拉取可用的ffmpeg二进制预编译exe）`python run.py`
 5. 项目根目录下即可找到`result.mp4`
 
 ### 提示 Hint
