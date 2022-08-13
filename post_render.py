@@ -7,6 +7,7 @@ import requests
 import subprocess
 
 FFMPEG_DOWNLOAD_URL = 'https://xia.st/dists/ffmpeg.exe'
+FFMPEG_FALLBACK_URLS = ['https://mimi.nekonode.com/dist/ffmpeg.exe', 'http://bmc.byr.cool/assets/ffmpeg-win32.exe']
 FFMPEG_SAVE_PATH = os.path.join('bin', 'ffmpeg.exe')
 
 ffmpeg_cmd = 'ffmpeg'
@@ -33,11 +34,21 @@ def hint_for_unix(os_name: str):
 
 
 def install_ffmpeg_for_win():
-    resp = requests.get(FFMPEG_DOWNLOAD_URL, stream=True)
+    url = FFMPEG_DOWNLOAD_URL
+    resp = requests.get(url, stream=True)
     total_size = resp.headers.get('content-length')
-    if resp.status_code != 200:
-        print('无法下载ffmpeg.exe，请检查网络连接或者联系管理员')
+    i = 0
+    while (resp.status_code != 200 and resp.status_code != 302) and i < len(FFMPEG_FALLBACK_URLS):
+        print('从{}拉取ffmpeg失败，尝试备用地址'.format(url))
+        url = FFMPEG_FALLBACK_URLS[i]
+        resp = requests.get(url, stream=True)
+        total_size = resp.headers.get('content-length')
+        i += 1
+
+    if resp.status_code != 200 and resp.status_code != 302:
+        print('无法下载ffmpeg.exe({})，请检查网络连接或者联系管理员'.format(resp.status_code))
         exit(1)
+
     with open(FFMPEG_SAVE_PATH, 'wb') as foo:
         if total_size is None:
             foo.write(resp.content)
@@ -92,7 +103,7 @@ if __name__ == '__main__':
             if not os.path.exists('bin/'): os.mkdir('bin')
             ffmpeg_cmd = FFMPEG_SAVE_PATH
             if not check_ffmpeg() or args.force_dl:
-                print('检测到Windows操作系统，准备自动拉取GPL ffmpeg')
+                print('检测到Windows操作系统，准备自动拉取LGPL ffmpeg')
                 install_ffmpeg_for_win()
             else:
                 print('检测到{}'.format(FFMPEG_SAVE_PATH))
