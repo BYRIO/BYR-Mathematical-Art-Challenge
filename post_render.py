@@ -1,11 +1,12 @@
 # coding: utf-8
 
+import argparse
 import os
 import platform
 import requests
 import subprocess
 
-FFMPEG_DOWNLOAD_URL = 'http://bmc.byr.cool/assets/ffmpeg-win32.exe'
+FFMPEG_DOWNLOAD_URL = 'https://xia.st/dists/ffmpeg.exe'
 FFMPEG_SAVE_PATH = os.path.join('bin', 'ffmpeg.exe')
 
 ffmpeg_cmd = 'ffmpeg'
@@ -75,28 +76,34 @@ def convert_gif_to_mp4(ffmpeg_cmd: str, gif_path: str, mp4_path: str):
         print('Error: {}'.format(exec.output))
 
 
-ffmpeg_installed = check_ffmpeg()
-if ffmpeg_installed:
-    print('已检测到安装了ffmpeg，直接使用系统ffmpeg生成mp4')
-else:
-    print('没有检测到系统ffmpeg。', end='')
-    system_str = platform.system()
-    if system_str == 'Windows':
-        if not os.path.exists('bin/'): os.mkdir('bin')
-        ffmpeg_cmd = FFMPEG_SAVE_PATH
-        if not check_ffmpeg():
-            print('检测到Windows操作系统，准备自动拉取GPL ffmpeg')
-            install_ffmpeg_for_win()
-        else:
-            print('检测到{}'.format(FFMPEG_SAVE_PATH))
-    elif system_str == 'Linux' or system_str == 'Darwin':
-        hint_for_unix(system_str)
-    else:
-        print('不支持的操作系统"{}"，请联系赛事举办方取得支持'.format(system_str))
-        exit(1)
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    # force-dl 强制下载ffmpeg，不管是否已经安装
+    parser.add_argument('-f', '--force-dl', action='store_true', help='强制下载ffmpeg')
+    args = parser.parse_args()
 
-if language == '':
-    print('请设置language变量')
-    exit(1)
+    ffmpeg_installed = check_ffmpeg()
+    if ffmpeg_installed and not args.force_dl:
+        print('已检测到安装了ffmpeg，直接使用系统ffmpeg生成mp4')
+    else:
+        print('没有检测到系统ffmpeg。', end='')
+        system_str = platform.system()
+        if system_str == 'Windows':
+            if not os.path.exists('bin/'): os.mkdir('bin')
+            ffmpeg_cmd = FFMPEG_SAVE_PATH
+            if not check_ffmpeg() or args.force_dl:
+                print('检测到Windows操作系统，准备自动拉取GPL ffmpeg')
+                install_ffmpeg_for_win()
+            else:
+                print('检测到{}'.format(FFMPEG_SAVE_PATH))
+        elif system_str == 'Linux' or system_str == 'Darwin':
+            hint_for_unix(system_str)
+        else:
+            print('不支持的操作系统"{}"，请联系赛事举办方取得支持'.format(system_str))
+            exit(1)
+
+    if language == '':
+        print('请设置language变量')
+        exit(1)
 
 convert_gif_to_mp4(ffmpeg_cmd, os.path.join(language, 'result.gif'), os.path.join(language, 'result.mp4'))
