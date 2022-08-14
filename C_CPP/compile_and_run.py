@@ -9,7 +9,7 @@ bool: 是否编译成功
 str: 编译的message，将会打印'''
 
 
-def compile() -> tuple[bool, str]:
+def compile_program() -> tuple[bool, str]:
     sp.run(['make', 'clean'])
     result = sp.run(['make', 'render'])
     if result.returncode == 0:
@@ -23,7 +23,7 @@ bool: 是否运行成功
 str: 运行的message，将会打印'''
 
 
-def render(gif_path: str) -> tuple[bool, str]:
+def render_gif(gif_path: str) -> tuple[bool, str]:
     system_str = platform.system()
     if system_str == 'Windows':
         exe = '.\\render.exe'
