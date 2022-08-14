@@ -174,7 +174,7 @@ if __name__ == '__main__':
     
     print('开始编译...')
 
-    compile_success, compile_msg = comp.compile()
+    compile_success, compile_msg = comp.compile_program()
 
     if compile_success:
         print_info(compile_msg)
@@ -183,7 +183,7 @@ if __name__ == '__main__':
         exit(1)
 
     print('开始渲染...')
-    render_success, render_msg = comp.render(gif_path)
+    render_success, render_msg = comp.render_gif(gif_path)
 
     if render_success:
         print_info(render_msg)
