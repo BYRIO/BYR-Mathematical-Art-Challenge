@@ -8,6 +8,7 @@ from traceback import print_tb
 import requests
 import subprocess
 from colorama import Fore, Style
+import sys
 
 
 def script_relative(relative_path: str) -> str:
@@ -171,6 +172,7 @@ if __name__ == '__main__':
 
     # 切换工作目录到语言目录
     os.chdir(lang_path)
+    sys.path.append(lang_path)
     
     print('开始编译...')
 
@@ -193,5 +195,6 @@ if __name__ == '__main__':
 
     # 回切工作目录
     os.chdir(script_relative('.'))
+    sys.path.remove(lang_path)
 
     encode_gif(args.force_dl, gif_path, mp4_path)
