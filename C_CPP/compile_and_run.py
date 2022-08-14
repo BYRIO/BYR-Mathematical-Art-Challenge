@@ -1,17 +1,38 @@
 # 默认根路径已经设置为了对应语言下的文件夹
+import os
 import subprocess as sp
 import platform
 import shutil
-import os
 
 '''返回
 bool: 是否编译成功
 str: 编译的message，将会打印'''
 
 
+def _check_toolchain(plat) -> bool:
+    tool = 'cmake' if plat == 'Windows' else 'make'
+    try:
+        sp.call([tool, '--version'], stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+        return True
+    except:
+        return False
+
+
 def compile_program() -> tuple[bool, str]:
-    sp.run(['make', 'clean'])
-    result = sp.run(['make', 'render'])
+    plat = platform.system()
+    if not _check_toolchain(plat):
+        return False, '没有检测到编译工具链或者工具链损坏，请阅读README.md按照指示安装'
+    if plat == 'Windows':
+        result = sp.run(['cmake', '-B', 'build'])
+        if result.returncode != 0:
+            return False, '使用cmake预构建时出错'
+        result = sp.run(['cmake', '--build', 'build'])
+        if result.returncode != 0:
+            return False, '使用cmake+msvc编译时出错'
+        shutil.copy(os.path.join('build', 'Debug', 'render.exe'), '.\\render.exe')
+    else:
+        sp.run(['make', 'clean'])
+        result = sp.run(['make', 'render'])
     if result.returncode == 0:
         return True, '编译成功'
     else:

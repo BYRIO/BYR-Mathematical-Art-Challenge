@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(msvc_cpp)
+add_executable(render main.cpp)
+set_property(TARGET render PROPERTY CXX_STANDARD 14)
+set_property(TARGET render PROPERTY CXX_STANDARD_REQUIRED ON)
