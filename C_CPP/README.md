@@ -22,4 +22,11 @@ cd C_CPP
 make render
 ```
 
-即可得到可执行的渲染文件`render`，使用`.\render.exe`执行，得到输出`result.gif`。
+**Windows+Visual Studio**: 
+请确保安装了Visual Studio和Cmake，然后在CMD或PowerShell里运行以下代码：
+```cmd
+cd C_CPP
+.\win_msvc.bat
+```
+
+即可得到可执行的渲染文件`render.exe`，使用`.\render.exe`执行，得到输出`result.gif`。
