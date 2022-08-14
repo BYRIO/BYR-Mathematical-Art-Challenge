@@ -49,6 +49,8 @@ unsigned char RD(int x, int y, float t);
 - [Python](./Python/README.md)
 - [Java](./Java/README.md)
 
+### 快速构建脚本
+
 我们提供了一个脚本`run.py`来自动进行编译、运行、编码等工作以减轻参赛者的心智负担，我们假定你的计算机上已经下载了[python运行环境](https://www.python.org/downloads/)。
 
 1. 编写对应的语言代码
