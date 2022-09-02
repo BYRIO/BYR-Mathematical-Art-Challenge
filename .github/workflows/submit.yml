@@ -1,14 +1,8 @@
 name: Run and submit the result
 
 on:
-  pull_request:
-    types:
-      - opened
-    branches:
-      - "master"
-env:
-  GITHUB_PR_USER: ${{github.event.pull_request.user.login}}
-  GITHUB_PR_BODY: ${{github.event.pull_request.body}}
+  pull_request_target:
+    types: [opened, reopened, edited]
 
 jobs:
   run_and_commit:
@@ -51,5 +45,5 @@ jobs:
           url: ${{ secrets.UPLOAD_URL }}
           method: "POST"
           contentType: application/x-www-form-urlencoded
-          data: '{"signature": "$GITHUB_PR_USER", "github_id": "$GITHUB_PR_BODY", "language": "${{ steps.language.outputs.lang }}"}'
+          data: '{"signature": "${{ github.event.pull_request.user.login }}", "github_id": "${{ github.event.pull_request.body }}", "language": "${{ steps.language.outputs.lang }}"}'
           files: '{"code": "${{ github.workspace }}/${{ steps.language.outputs.file }}", "video": "${{ github.workspace }}/result.mp4"}'
