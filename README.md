@@ -1,5 +1,7 @@
 # BYR-Mathematical-Art-Challenge
 
+![GitHub](https://img.shields.io/github/license/Hyiker/BYR-Mathematical-Art-Challenge?style=flat-square)
+
 北邮人数学艺术挑战赛，灵感来自[Tweetable Mathematical Art](http://codegolf.stackexchange.com/questions/35569/tweetable-mathematical-art)
 
 ## 介绍 Description
