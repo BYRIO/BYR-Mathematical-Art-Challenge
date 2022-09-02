@@ -1,0 +1,55 @@
+name: Run and submit the result
+
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - "master"
+env:
+  GITHUB_PR_USER: ${{github.event.pull_request.user.login}}
+  GITHUB_PR_BODY: ${{github.event.pull_request.body}}
+
+jobs:
+  run_and_commit:
+    name: Run and commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip"
+      - run: |
+          python -m pip install -r requirements_dev.txt
+      - name: Retrieve user language
+        id: language
+        run: |
+          echo "::set-output name=lang::$(python run.py --language)"
+          echo "::set-output name=file::$(python run.py --source)"
+      - uses: actions-rs/toolchain@v1
+        if: ${{ steps.language.outputs.lang == 'Rust' }}
+        with:
+          override: true
+          toolchain: stable
+      - run: |
+          python -m pip install -r Python/requirements.txt
+        if: ${{ steps.language.outputs.lang == 'Python' }}
+      - run: sudo apt update
+      - run: |
+          sudo apt install -y cmake gcc-10
+        if: ${{ steps.language.outputs.lang == 'C_CPP' }}
+      - run: |
+          sudo apt install -y openjdk-11-jre maven
+        if: ${{ steps.language.outputs.lang == 'Java' }}
+      - uses: FedericoCarboni/setup-ffmpeg@v1
+      - name: Render the image
+        run: python ./run.py -y
+      - name: Upload the result
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.UPLOAD_URL }}
+          method: "POST"
+          contentType: application/x-www-form-urlencoded
+          data: '{"signature": "$GITHUB_PR_USER", "github_id": "$GITHUB_PR_BODY", "language": "${{ steps.language.outputs.lang }}"}'
+          files: '{"code": "${{ github.workspace }}/${{ steps.language.outputs.file }}", "video": "${{ github.workspace }}/result.mp4"}'

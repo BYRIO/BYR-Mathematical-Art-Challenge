@@ -151,8 +151,27 @@ if __name__ == '__main__':
     parser.add_argument('-g', '--gif', type=str, help='gif文件路径', default=script_relative('./result.gif'))
     # mp4 mp4文件路径
     parser.add_argument('-m', '--mp4', type=str, help='mp4文件路径', default=script_relative('./result.mp4'))
+    # 是否仅输出使用语言 language
+    parser.add_argument('-l', '--language', action='store_true', help='输出当前使用语言')
+    # 是否仅输出使用语言language对应的文件路径
+    parser.add_argument('-s', '--source', action='store_true', help='输出当前使用语言对应的源文件目录')
 
     args = parser.parse_args()
+
+    if args.language:
+        print(language)
+        exit(0)
+    if args.source:
+        join = os.path.join
+        if language == 'C_CPP':
+            print(join('C_CPP', 'render.h'))
+        elif language == 'Java':
+            print(join('Java', 'src', 'main', 'java', 'work', 'byrio', 'byrmathematicalartchallenge', 'Render.java'))
+        elif language == 'Python':
+            print(join('Python', 'render.py'))
+        elif language == 'Rust':
+            print(join('Rust', 'src', 'render.rs'))
+        exit(0)
 
     gif_path = os.path.abspath(args.gif)
     mp4_path = os.path.abspath(args.mp4)
@@ -162,18 +181,17 @@ if __name__ == '__main__':
     lang_path = script_relative('./{}'.format(language))
 
     print_info('你选择使用的语言目录：{}'.format(language))
-    
+
     if os.path.exists(gif_path) and not args.confirm:
         confirm_in = input('{}已存在，是否覆盖？[y/n]'.format(gif_path))
         if confirm_in != 'y':
             print_error('退出')
             exit(1)
 
-
     # 切换工作目录到语言目录
     os.chdir(lang_path)
     sys.path.append(lang_path)
-    
+
     print('开始编译...')
 
     compile_success, compile_msg = comp.compile_program()
