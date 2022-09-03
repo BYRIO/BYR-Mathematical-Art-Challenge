@@ -17,11 +17,11 @@ jobs:
         with:
           python-version: "3.10"
           cache: "pip"
-      # - name: Setup Rust
-      #   uses: actions-rs/toolchain@v1
-      #   with:
-      #     override: true
-      #     toolchain: stable
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          override: true
+          toolchain: stable
       - name: Setup other envs
         run: |
           sudo apt update

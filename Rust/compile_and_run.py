@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess as sp
 
 def _check_cargo() -> bool:
@@ -12,9 +13,10 @@ def compile_program() -> tuple[bool, str]:
     else:
         return False, "编译失败"
 
-def run_program() -> tuple[bool, str]:
+def render_gif(gif_path: str) -> tuple[bool, str]:
     result = sp.run(["cargo", "run", "--release"], check=False)
     if result.returncode == 0:
+        shutil.copy('./result.gif', gif_path)
         return True, "运行成功"
     else:
         return False, "运行失败"
