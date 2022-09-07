@@ -1,12 +1,13 @@
 name: Run and submit the result
 
 on:
-  pull_request:
-    types: [opened, reopened, labeled]
+  pull_request_review:
+    types: [submitted]
 
 jobs:
   run_and_commit:
     name: Run and commit
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
