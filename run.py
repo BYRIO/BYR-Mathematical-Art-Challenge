@@ -101,7 +101,7 @@ def convert_gif_to_mp4(ffmpeg_cmd: str, gif_path: str, mp4_path: str):
     encoder = get_ffmpeg_h264_encoder(ffmpeg_cmd)
     try:
         subprocess.call([ffmpeg_cmd, '-hide_banner', '-loglevel', 'error', '-y', '-i', gif_path,
-                         '-qp', '0', '-s', '512x512', '-pix_fmt', 'yuv420p', '-vcodec', encoder, '-r', '50', '-b:v',
+                         '-s', '512x512', '-pix_fmt', 'yuv420p', '-profile:v', 'main', '-vcodec', encoder, '-r', '50', '-b:v',
                          '12M', mp4_path])
         print('成功转换{}到{}'.format(gif_path, mp4_path))
     except subprocess.CalledProcessError as exec:
