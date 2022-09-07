@@ -2,7 +2,7 @@ name: Run and submit the result
 
 on:
   pull_request:
-    types: [labeled]
+    types: [opened, reopened, labeled]
 
 jobs:
   run_and_commit:
