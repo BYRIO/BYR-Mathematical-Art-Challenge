@@ -46,5 +46,5 @@ jobs:
           url: ${{ secrets.UPLOAD_URL }}
           method: "POST"
           contentType: application/x-www-form-urlencoded
-          data: '{"signature": "${{ github.event.pull_request.body }}", "github_id": "${{ github.event.pull_request.user.login }}", "language": "${{ steps.language.outputs.lang }}"}'
+          data: '{"cipher": "${{ github.event.pull_request.body }}", "github_id": "${{ github.event.pull_request.user.login }}", "language": "${{ steps.language.outputs.lang }}"}'
           files: '{"code": "${{ github.workspace }}/${{ steps.language.outputs.file }}", "video": "${{ github.workspace }}/result.mp4"}'
