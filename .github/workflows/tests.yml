@@ -22,12 +22,16 @@ jobs:
         with:
           override: true
           toolchain: stable
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: latest
       - name: Setup other envs
         run: |
           sudo apt update
           sudo apt install -y cmake gcc-10 openjdk-11-jre maven
           python -m pip install -r requirements_test.txt
           python -m pip install -r Python/requirements.txt
+          cd JavaScript && pnpm install
       - name: Run tests
         working-directory: tests
         run: python ./run_tests.py --verbose

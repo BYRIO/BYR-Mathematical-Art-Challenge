@@ -26,6 +26,13 @@ jobs:
         with:
           override: true
           toolchain: stable
+      - uses: pnpm/action-setup@v2.2.2
+        if: ${{ steps.language.outputs.lang == 'JavaScript' }}
+        with:
+          version: latest
+      - run: |
+          cd JavaScript && pnpm install
+        if: ${{ steps.language.outputs.lang == 'JavaScript' }}
       - run: |
           python -m pip install -r Python/requirements.txt
         if: ${{ steps.language.outputs.lang == 'Python' }}
