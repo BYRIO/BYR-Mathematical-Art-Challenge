@@ -1,8 +1,10 @@
 # BYR-Mathematical-Art-Challenge
 
-![GitHub](https://img.shields.io/github/license/Hyiker/BYR-Mathematical-Art-Challenge?style=flat-square)
+![GitHub](https://img.shields.io/github/license/BYRIO/BYR-Mathematical-Art-Challenge?style=flat-square)  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/BYRIO/BYR-Mathematical-Art-Challenge/Run%20tests?style=flat-square)
 
 北邮人数学艺术挑战赛，灵感来自[Tweetable Mathematical Art](http://codegolf.stackexchange.com/questions/35569/tweetable-mathematical-art)
+
+[比赛主页](https://bmac.byr.ink/)（仅校内）
 
 ## 介绍 Description
 
@@ -50,6 +52,16 @@ unsigned char RD(int x, int y, float t);
 - [Rust](./Rust/README.md)
 - [Python](./Python/README.md)
 - [Java](./Java/README.md)
+
+## 赛程
+
+​比赛主要分为三个阶段：参赛提交阶段、展示投票阶段和评奖阶段
+
+- 参赛提交阶段 2022年9月9日（星期五）12时00分-2022年9月14日（星期三）23时59分
+
+- 展示投票阶段 2022年9月10日（星期六）12时00分-2022年9月15日（星期三）23时59分
+
+- 评奖阶段 9月17日（星期日）
 
 ## 提交 Submission
 
