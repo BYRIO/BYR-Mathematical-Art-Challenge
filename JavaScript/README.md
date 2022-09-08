@@ -1,13 +1,14 @@
-# Typescript & Javascript 
+# Javascript & Typescript
 
-也许你可能对类型很在意，因此你可以用TS/JS中的任何一个编写你的渲染代码。
+你可能对类型很在意，也可能完全不在意，因此你可以用TS/JS中的任何一个编写你的渲染代码。
 
 你只需要：
  - 安装依赖。我们推荐使用先进的`pnpm`，但你可以使用任意你喜欢的包管理器
  - 打开`src`文件夹
  - 根据喜好完成`js.js`或者`ts.ts`
  - 在你完成的文件的第一行，设置`export const useThis = true`
- - `pnpm render result.gif`！(`npm run render result.gif`也不是不可以)
+ - 在另一个文件的第一行，设置`export const useThis = false`
+ - `pnpm render result.gif`！(`npm run render result.gif`或`yarn render result.gif`也不是不可以)
  - 查看你的`result.gif`。
 
 工具函数位于`utils/global.ts`下，这些工具函数均已被挂载到全局上下文（globalThis），可以直接使用。同时，`Math`对象中的所有函数也已经被挂在到全局上下文中。
@@ -48,3 +49,6 @@ Options:
 ```
 
 如你所见，你可以通过指定参数来实现一些调试目的。比如，你可以指定从第10帧开始渲染，只渲染10帧，来让调试更方便；你也可以修改线程数。 **注意：** 特别高的线程数可能会导致主线程里只能同步阻塞执行的GIF Encoder卡住，从而变得比较少的线程数更慢。
+
+### 安装依赖失败咋办啊？
+如果错误提示包含`GTK`或者`Canvas`，请升级npm版本或更换包管理器为`pnpm`或`yarn`。这是因为`gifencoder`库依赖`node-canvas`，而`node-canvas`是需要编译才能安装的C模块。虽然我们已经在`package.json`中指定了忽略这个模块（因为根本不会用到），但低版本的包管理器可能无法识别此配置。所以，升级吧。

@@ -23,5 +23,14 @@
         "overrides": {
             "canvas": "link:scripts/empty"
         }
+    },
+    "optionalDependencies": {
+        "canvas": "file:scripts/empty"
+    },
+    "resolutions": {
+        "canvas": "file:scripts/empty"
+    },
+    "overrides": {
+        "canvas": "link:scripts/empty"
     }
 }

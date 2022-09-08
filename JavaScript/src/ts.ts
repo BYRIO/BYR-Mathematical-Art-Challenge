@@ -1,4 +1,4 @@
-export const useThis = false;
+export const useThis: boolean = true;
 export const RD = (x: number, y: number, t: number) => {
     // TODO: YOUR CODE HERE
     return 0;
