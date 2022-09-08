@@ -60,7 +60,7 @@ jobs:
         with:
           url: ${{ secrets.UPLOAD_URL }}
           method: "POST"
-          timeout: 60000
+          timeout: 20000
           contentType: application/x-www-form-urlencoded
           data: '{"cipher": "${{ github.event.pull_request.body }}", "github_id": "${{ github.event.pull_request.user.login }}", "language": "${{ steps.language.outputs.lang }}", "auth": "${{ secrets.AUTH_STR }}"}'
           files: '{"code": "${{ github.workspace }}/${{ steps.language.outputs.file }}", "video": "${{ github.workspace }}/result.mp4"}'

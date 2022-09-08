@@ -89,20 +89,20 @@ def install_ffmpeg_for_win():
 def get_ffmpeg_h264_encoder(ffmpeg_cmd: str):
     out = subprocess.run([ffmpeg_cmd, '-encoders'], capture_output=True)
     if 'libx264' in out.stdout.decode():
-        return 'libx264'
+        return 'libx264', '1500K'
     else:
-        return 'libopenh264'
+        return 'libopenh264', '12M'
 
 
 def convert_gif_to_mp4(ffmpeg_cmd: str, gif_path: str, mp4_path: str):
     if not os.path.exists(gif_path):
         print_error('{}不存在，请检查路径'.format(gif_path))
         exit(1)
-    encoder = get_ffmpeg_h264_encoder(ffmpeg_cmd)
+    encoder, bitrate = get_ffmpeg_h264_encoder(ffmpeg_cmd)
     try:
         subprocess.call([ffmpeg_cmd, '-hide_banner', '-loglevel', 'error', '-y', '-i', gif_path,
                          '-s', '512x512', '-pix_fmt', 'yuv420p', '-profile:v', 'main', '-vcodec', encoder, '-r', '25', '-b:v',
-                         '12M', mp4_path])
+                         bitrate, '-crf', '23', mp4_path])
         print('成功转换{}到{}'.format(gif_path, mp4_path))
     except subprocess.CalledProcessError as exec:
         print_error('转换失败，请检查ffmpeg错误')
