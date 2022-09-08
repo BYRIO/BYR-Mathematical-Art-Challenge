@@ -283,3 +283,7 @@ render.exe
 result.*
 render.txt
 bin/
+
+# JS/TS
+node_modules/
+dist/
