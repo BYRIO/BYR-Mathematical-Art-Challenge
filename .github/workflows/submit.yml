@@ -48,13 +48,19 @@ jobs:
       - uses: FedericoCarboni/setup-ffmpeg@v1
       - name: Render the image
         run: python ./run.py -y
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.pull_request.user.login }}-artifact
+          path: |
+            ${{ github.workspace }}/${{ steps.language.outputs.file }}
+            ${{ github.workspace }}/result.mp4
       - name: Upload the result
         id: upload
         uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.UPLOAD_URL }}
           method: "POST"
-          timeout: 60000
+          timeout: 20000
           contentType: application/x-www-form-urlencoded
           data: '{"cipher": "${{ github.event.pull_request.body }}", "github_id": "${{ github.event.pull_request.user.login }}", "language": "${{ steps.language.outputs.lang }}", "auth": "${{ secrets.AUTH_STR }}"}'
           files: '{"code": "${{ github.workspace }}/${{ steps.language.outputs.file }}", "video": "${{ github.workspace }}/result.mp4"}'
