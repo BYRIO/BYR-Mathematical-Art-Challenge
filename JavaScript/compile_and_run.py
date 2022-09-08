@@ -1,4 +1,5 @@
 import os
+from platform import platform
 import shutil
 import subprocess as sp
 
@@ -17,8 +18,11 @@ def compile_program() -> tuple[bool, str]:
 
 
 def render_gif(gif_path: str) -> tuple[bool, str]:
-    result = sp.run(["cmd", "/c", "npm", "run",
-                    "step:run", gif_path], check=False)
+    cmd = ["npm", "run",
+           "step:run", gif_path]
+    if platform() == "Windows":
+        cmd = ["cmd", "/c"] + cmd
+    result = sp.run(cmd, check=False)
     if result.returncode == 0:
         return True, "运行成功"
     else:
