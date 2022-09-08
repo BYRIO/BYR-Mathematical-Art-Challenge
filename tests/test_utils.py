@@ -32,7 +32,8 @@ def generate_compile_and_run():
             sys.path.append(dir_path)
             spec.loader.exec_module(compile_and_run)
             assert compile_and_run.compile_program()[0]
-            assert compile_and_run.render_gif(os.path.join(dir_path, '..', 'result.gif'))[0]
+            if test_name != 'python':
+                assert compile_and_run.render_gif(os.path.join(dir_path, '..', 'result.gif'))[0]
             return func(*args, **kwargs)
         return wrap_func
 

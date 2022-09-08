@@ -287,3 +287,4 @@ bin/
 # JS/TS
 node_modules/
 dist/
+.pnpm-store/

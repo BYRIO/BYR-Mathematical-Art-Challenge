@@ -29,7 +29,7 @@ def compile_program() -> tuple[bool, str]:
         result = sp.run(['cmake', '--build', 'build', '--config', 'Release'])
         if result.returncode != 0:
             return False, '使用cmake+msvc编译时出错'
-        shutil.copy(os.path.join('build', 'Debug', 'render.exe'), '.\\render.exe')
+        shutil.copy(os.path.join('build', 'Release', 'render.exe'), '.\\render.exe')
     else:
         sp.run(['make', 'clean'])
         result = sp.run(['make', 'render'])

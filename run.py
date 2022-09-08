@@ -101,7 +101,7 @@ def convert_gif_to_mp4(ffmpeg_cmd: str, gif_path: str, mp4_path: str):
     encoder = get_ffmpeg_h264_encoder(ffmpeg_cmd)
     try:
         subprocess.call([ffmpeg_cmd, '-hide_banner', '-loglevel', 'error', '-y', '-i', gif_path,
-                         '-s', '512x512', '-pix_fmt', 'yuv420p', '-profile:v', 'main', '-vcodec', encoder, '-r', '50', '-b:v',
+                         '-s', '512x512', '-pix_fmt', 'yuv420p', '-profile:v', 'main', '-vcodec', encoder, '-r', '25', '-b:v',
                          '12M', mp4_path])
         print('成功转换{}到{}'.format(gif_path, mp4_path))
     except subprocess.CalledProcessError as exec:
@@ -171,6 +171,12 @@ if __name__ == '__main__':
             print(join('Python', 'render.py'))
         elif language == 'Rust':
             print(join('Rust', 'src', 'render.rs'))
+        elif language == 'JavaScript':
+            ts_path = join('JavaScript', 'src', 'ts.ts')
+            js_path = join('JavaScript', 'src', 'js.js')
+            with open(ts_path, 'r') as foo:
+                target = ts_path if 'true' in foo.readline() else js_path
+            print(target)
         exit(0)
 
     gif_path = os.path.abspath(args.gif)

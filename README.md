@@ -51,6 +51,12 @@ unsigned char RD(int x, int y, float t);
 - [Python](./Python/README.md)
 - [Java](./Java/README.md)
 
+## 提交 Submission
+
+在你开始编写代码时，请[Fork](https://github.com/BYRIO/BYR-Mathematical-Art-Challenge/fork)这个仓库，并且clone你Fork的仓库进行代码的编写。
+
+在你完成代码的编写后，将你的代码推送至fork出的仓库后，向这个仓库发起pull request，pull request的标题为**你的作品名**，pull request的内容是你从[这个网站](https://bmac.byr.ink/#/my)获取的**签名**（注意，你必须正确填写你的Github ID），这里有[一份示例PR](https://github.com/BYRIO/BYR-Mathematical-Art-Challenge/pull/3)可以参考。
+
 ### 快速构建脚本
 
 我们提供了一个脚本`run.py`来自动进行编译、运行、编码等工作以减轻参赛者的心智负担，我们假定你的计算机上已经下载了[python运行环境](https://www.python.org/downloads/)。
