@@ -9,7 +9,6 @@ on:
 jobs:
   run_and_commit:
     name: Run and commit
-    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
