@@ -1,8 +1,6 @@
 name: Run and submit the result
 
 on:
-  # pull_request_review:
-  #   types: [submitted]
   pull_request_target:
     types: [labeled]
 
@@ -51,6 +49,7 @@ jobs:
       - name: Render the image
         run: python ./run.py -y
       - name: Upload the result
+        id: upload
         uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.UPLOAD_URL }}
@@ -58,3 +57,7 @@ jobs:
           contentType: application/x-www-form-urlencoded
           data: '{"cipher": "${{ github.event.pull_request.body }}", "github_id": "${{ github.event.pull_request.user.login }}", "language": "${{ steps.language.outputs.lang }}"}'
           files: '{"code": "${{ github.workspace }}/${{ steps.language.outputs.file }}", "video": "${{ github.workspace }}/result.mp4"}'
+      - name: Validate return code
+        if: ${{ fromJson(steps.upload.outputs.response).status != 200 }}
+        run: |
+          echo "::error::服务器返回错误信息 ${{ fromJson(steps.upload.outputs.response).message }}""
