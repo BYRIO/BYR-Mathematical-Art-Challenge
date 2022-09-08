@@ -48,6 +48,12 @@ jobs:
       - uses: FedericoCarboni/setup-ffmpeg@v1
       - name: Render the image
         run: python ./run.py -y
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.pull_request.user.login }}-artifact
+          path: |
+            ${{ github.workspace }}/${{ steps.language.outputs.file }}
+            ${{ github.workspace }}/result.mp4
       - name: Upload the result
         id: upload
         uses: fjogeleit/http-request-action@v1
